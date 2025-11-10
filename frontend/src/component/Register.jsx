@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Register = () => {
 
-    const [form, setForm] = useState({ email: "", password: "", subscriptionStart: "", duration: "monthly" });
+  const [form, setForm] = useState({  name: "",email: "", password: "", subscriptionStart: "", duration: "monthly" });
   const [msg, setMsg] = useState("");
 
   const submit = async (e) => {
@@ -21,21 +21,31 @@ const Register = () => {
       <div className="max-w-md mx-auto p-6 bg-white shadow rounded mt-6">
       <h2 className="text-xl font-semibold mb-4">Register</h2>
       <form onSubmit={submit} className="space-y-3">
+
+        <input required type="text" placeholder="Name"
+          value={form.name}
+          onChange={e => setForm({...form, name: e.target.value})}
+          className="w-full p-2 border rounded" />
+
         <input required type="email" placeholder="Email" value={form.email}
           onChange={e => setForm({...form, email: e.target.value})}
           className="w-full p-2 border rounded" />
+
         <input required type="password" placeholder="Password" value={form.password}
           onChange={e => setForm({...form, password: e.target.value})}
           className="w-full p-2 border rounded" />
+
         <label className="block">Subscription Start</label>
         <input type="date" value={form.subscriptionStart}
           onChange={e => setForm({...form, subscriptionStart: e.target.value})}
           className="w-full p-2 border rounded" />
+
         <select value={form.duration} onChange={e => setForm({...form, duration: e.target.value})}
           className="w-full p-2 border rounded">
           <option value="monthly">Monthly</option>
           <option value="yearly">Yearly</option>
         </select>
+        
         <button className="w-full p-2 bg-blue-600 text-white rounded">Register</button>
          <p  style={{textAlign:"center"}}>Already have an account? <Link to="/login">Login</Link></p>
       </form>
