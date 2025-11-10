@@ -125,3 +125,10 @@ export const ProtectedService=(req, res) => {
   res.json({ message: "Access granted to protected service for " + req.user.email });
 };
 
+// server.js (requires auth middleware that sets req.user)
+export const apime=async (req, res) => {
+  // req.user is already fetched by auth middleware (without password)
+  res.json({ email: req.user.email, subscriptionStart: req.user.subscriptionStart, subscriptionEnd: req.user.subscriptionEnd, duration: req.user.duration, userId: req.user._id });
+};
+
+
