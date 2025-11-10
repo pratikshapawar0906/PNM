@@ -60,7 +60,7 @@ const Dashboard = () => {
     <>
     <div className="max-w-xl mx-auto p-6 bg-white shadow rounded mt-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold">Dashboard</h2>
+        <h2 className="text-xl font-semibold  text-center">Dashboard</h2>
         <button onClick={() => { localStorage.clear(); setAuthToken(null); onLogout(); }}
           className="px-3 py-1 border rounded">Logout</button>
       </div>
