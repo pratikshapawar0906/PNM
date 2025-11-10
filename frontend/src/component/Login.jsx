@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import API, { setAuthToken } from "../api";
 import { Link } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { handleError, handleSuccess } from '../util';
 
 const Login = ({ onLogin }) => {
 
   const [form, setForm] = useState({ email: "", password: "" });
-  const [msg, setMsg] = useState("");
-
+  
   const submit = async e => {
     e.preventDefault();
     try {
@@ -14,31 +15,53 @@ const Login = ({ onLogin }) => {
       const token = res.data.token;
       localStorage.setItem("token", token);
       setAuthToken(token);
-      setMsg("Logged in");
+      handleSuccess("Logged in");
       onLogin();
     } catch (err) {
-      setMsg(err.response?.data?.message || "Login error");
+      handleError(err.response?.data?.message || "Login error");
     }
   };
 
   return (
-    <>
+    <div className="min-h-screen flex justify-center items-center bg-gray-100">
+      <div className="max-w-md w-full p-6 bg-white shadow-lg rounded-lg">
+        <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
 
-    <div className="max-w-md mx-auto p-6 bg-white shadow rounded mt-6">
-      <h2 className="text-xl font-semibold mb-4">Login</h2>
-      <form onSubmit={submit} className="space-y-3">
-        <input required type="email" placeholder="Email" value={form.email}
-          onChange={e => setForm({...form, email: e.target.value})} className="w-full p-2 border rounded" />
-        <input required type="password" placeholder="Password" value={form.password}
-          onChange={e => setForm({...form, password: e.target.value})} className="w-full p-2 border rounded" />
-        <button className="w-full p-2 bg-green-600 text-white rounded">Login</button>
-        <p style={{textAlign:"center"}}>Don't have an account? <Link to="/register">Register</Link></p>
-      </form>
-      {msg && <p className="mt-3 text-sm">{msg}</p>}
+        <form onSubmit={submit} className="space-y-4">
+          <input
+            required
+            type="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={e => setForm({ ...form, email: e.target.value })}
+            className="w-full p-3 border border-gray-300 rounded-md"
+          />
+
+          <input
+            required
+            type="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={e => setForm({ ...form, password: e.target.value })}
+            className="w-full p-3 border border-gray-300 rounded-md"
+          />
+
+          <button className="w-full p-3 bg-green-600 hover:bg-green-700 transition text-white rounded-md font-medium">
+            Login
+          </button>
+        </form>
+
+        <p className="text-center mt-4">
+          Don't have an account?{" "}
+          <Link to="/register" className="text-blue-600 font-semibold hover:underline">
+            Register
+          </Link>
+        </p>
+
+        <ToastContainer />
+      </div>
     </div>
-      
-    </>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
