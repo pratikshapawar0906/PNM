@@ -80,9 +80,9 @@ This project is a **full-stack subscription management system** where users can 
 
 ---
 
-## 📌 Features
+##  Features
 
-### 👤 User Registration
+###  User Registration
 - Users register with:
   - Email
   - Password
@@ -90,28 +90,28 @@ This project is a **full-stack subscription management system** where users can 
   - Subscription Duration (Monthly or Yearly)
 - System automatically calculates subscription **End Date** based on the selected duration.
 
-### 🔐 Login & Authentication
+###  Login & Authentication
 - Secure authentication using **JWT Tokens**.
 - Token stored and used for authorized API requests.
 
-### 📅 Subscription Status
+###  Subscription Status
 - Displays:
   - Email Address
   - Subscription Status → `Active` / `Expired`
   - Subscription End Date (Dynamically calculated)
 
-### ⛔ Access Control
+###  Access Control
 - If **Active** → User can access protected service.
 - If **Expired** → User must **Renew Subscription**.
 
-### 🔄 Subscription Renewal
+###  Subscription Renewal
 - Extend subscription by:
   - +1 Month
   - +1 Year
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 | Layer | Technology Used |
 |------|-----------------|
@@ -122,9 +122,10 @@ This project is a **full-stack subscription management system** where users can 
 
 ---
 
-## ⚙️ Setup Instructions (Local Development)
+##  Setup Instructions (Local Development)
 
-### 1️ Clone the Repository
+###
+ 1️ Clone the Repository
 ```bash
 git clone <your-repo-url>
 cd <project-folder>
