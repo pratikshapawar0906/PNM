@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:7000/api",
+  baseURL: "https://pnm-tgxe.onrender.com",
 });
 
 export const setAuthToken = (token) => {
