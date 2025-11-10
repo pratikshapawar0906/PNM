@@ -26,7 +26,7 @@ const Dashboard = () => {
         setLoading(false);
         return;
       }
-      const res = await API.get(`/me`);
+      const res = await API.get(`/api/me`);
       setStatus(res.data);
     } catch (err) {
       setStatus({ message: err.response?.data?.message || "Failed to fetch status" });
