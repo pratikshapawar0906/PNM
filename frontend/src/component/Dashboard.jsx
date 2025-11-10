@@ -57,46 +57,77 @@ const Dashboard = () => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <>
-    <div className="max-w-xl mx-auto p-6 bg-white shadow rounded mt-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold  text-center">Dashboard</h2>
-        <button onClick={() => { localStorage.clear(); setAuthToken(null); onLogout(); }}
-          className="px-3 py-1 border rounded">Logout</button>
-      </div>
-
-      {status ? (
-        <div className="mt-4 space-y-3">
-          <p><strong>Email:</strong> {status.email}</p>
-          <p><strong>Status:</strong> <span className={status.status === "Active" ? "text-green-600" : "text-red-600"}>{status.status}</span></p>
-          <p><strong>Ends:</strong> {new Date(status.subscriptionEnd).toLocaleString()}</p>
-
-          {status.status === "Active" ? (
-            <div>
-              <button onClick={accessService} className="px-4 py-2 bg-indigo-600 text-white rounded">Use Service</button>
-              <div className="mt-3">
-                <p>Extend subscription:</p>
-                <div className="space-x-2">
-                  <button onClick={() => renew("monthly")} className="px-3 py-1 border rounded">+1 month</button>
-                  <button onClick={() => renew("yearly")} className="px-3 py-1 border rounded">+1 year</button>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div>
-              <p className="text-sm">Subscription expired — renew to regain access.</p>
-              <div className="mt-2 space-x-2">
-                <button onClick={() => renew("monthly")} className="px-3 py-1 border rounded">Renew Monthly</button>
-                <button onClick={() => renew("yearly")} className="px-3 py-1 border rounded">Renew Yearly</button>
-              </div>
-            </div>
-          )}
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
+  
+        <h2 className="text-2xl font-bold text-center mb-4">Dashboard</h2>
+  
+        <div className="flex justify-end">
+          <button 
+            onClick={onLogout}
+            className="text-sm text-red-600 hover:underline">
+            Logout
+          </button>
         </div>
-      ) : <p>No status found</p>}
+  
+        {status ? (
+          <div className="mt-4  space-y-3">
+            <p><strong>Email:</strong> {status.email}</p>
+            <p>
+              <strong>Status:</strong>{" "}
+              <span className={status.status === "Active" ? "text-green-600 font-semibold" : "text-red-600 font-semibold"}>
+                {status.status}
+              </span>
+            </p>
+            <p><strong>Ends:</strong> {new Date(status.subscriptionEnd).toLocaleDateString()}</p>
+  
+            {status.status === "Active" ? (
+              <>
+                <button 
+                  onClick={accessService} 
+                  className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg mt-3">
+                  Use Service
+                </button>
+  
+                <p className="mt-4 font-medium">Extend Subscription</p>
+                <div className="flex justify-center gap-3 mt-2">
+                  <button 
+                    onClick={() => renew("monthly")} 
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    +1 Month
+                  </button>
+                  <button 
+                    onClick={() => renew("yearly")} 
+                    className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+                    +1 Year
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <p className="text-sm text-red-600 mt-2">Subscription expired — renew to regain access.</p>
+                <div className="flex justify-center gap-3 mt-3">
+                  <button 
+                    onClick={() => renew("monthly")} 
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    Renew Monthly
+                  </button>
+                  <button 
+                    onClick={() => renew("yearly")} 
+                    className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+                    Renew Yearly
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        ) : (
+          <p className="text-center mt-4">No status found</p>
+        )}
+      </div>
     </div>
-      
-    </>
-  )
+  );
+
 }
 
 export default Dashboard

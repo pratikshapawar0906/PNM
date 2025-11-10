@@ -68,3 +68,74 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+# Subscription Based System
+
+This project is a **full-stack subscription management system** where users can register, login, view their subscription status, access protected services only if their subscription is active, and renew their subscription monthly or yearly.
+
+### 🚀 Live Demo
+- **Frontend:** https://pnm-1.netlify.app/login  
+- **Backend (API):** https://pnm-tgxe.onrender.com/api
+
+---
+
+## 📌 Features
+
+### 👤 User Registration
+- Users register with:
+  - Email
+  - Password
+  - Subscription Start Date
+  - Subscription Duration (Monthly or Yearly)
+- System automatically calculates subscription **End Date** based on the selected duration.
+
+### 🔐 Login & Authentication
+- Secure authentication using **JWT Tokens**.
+- Token stored and used for authorized API requests.
+
+### 📅 Subscription Status
+- Displays:
+  - Email Address
+  - Subscription Status → `Active` / `Expired`
+  - Subscription End Date (Dynamically calculated)
+
+### ⛔ Access Control
+- If **Active** → User can access protected service.
+- If **Expired** → User must **Renew Subscription**.
+
+### 🔄 Subscription Renewal
+- Extend subscription by:
+  - +1 Month
+  - +1 Year
+
+---
+
+## 🛠 Tech Stack
+
+| Layer | Technology Used |
+|------|-----------------|
+| Frontend | React.js, Axios, TailwindCSS |
+| Backend | Node.js, Express.js |
+| Database | MongoDB |
+| Auth | JSON Web Token (JWT) |
+
+---
+
+## ⚙️ Setup Instructions (Local Development)
+
+### 1️ Clone the Repository
+```bash
+git clone <your-repo-url>
+cd <project-folder>
+
+2️ Install Frontend Dependencies
+
+cd frontend
+npm install
+npm start
+
+3️ Install Backend Dependencies
+
+cd backend
+nodemon index.js
