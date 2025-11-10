@@ -15,23 +15,25 @@ const Dashboard = () => {
   const fetchStatus = async () => {
     setLoading(true);
     try {
-      // get current logged in user email from token? For simplicity, request profile from /me isn't implemented
-      // Instead, backend has /status/:email endpoint. We'll store email in localStorage during login in a real app.
       const token = localStorage.getItem("token");
       setAuthToken(token);
-      // Simplest: add email to localStorage at login. For now assume 'email' is stored:
-      const email = localStorage.getItem("email");
-      if (!email) {
-        setStatus({ message: "Email missing. Re-login." });
-        setLoading(false);
-        return;
-      }
-      const res = await API.get(`/api/me`);
-      setStatus(res.data);
+      const res = await API.get("/api/me"); // returns subscriptionEnd
+  
+      const now = new Date();
+      const subscriptionEnd = new Date(res.data.subscriptionEnd);
+      const computedStatus = now <= subscriptionEnd ? "Active" : "Expired";
+  
+      setStatus({
+        ...res.data,
+        status: computedStatus
+      });
     } catch (err) {
       setStatus({ message: err.response?.data?.message || "Failed to fetch status" });
-    } finally { setLoading(false); }
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   useEffect(() => { fetchStatus(); }, []);
 
