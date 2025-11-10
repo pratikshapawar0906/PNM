@@ -14,6 +14,7 @@ const Login = ({ onLogin }) => {
       const res = await API.post("/login", form);
       const token = res.data.token;
       localStorage.setItem("token", token);
+      localStorage.setItem("email", res.data.user.email);
       setAuthToken(token);
       handleSuccess("Logged in");
       onLogin();
