@@ -19,13 +19,15 @@ const Dashboard = () => {
       // Instead, backend has /status/:email endpoint. We'll store email in localStorage during login in a real app.
       const token = localStorage.getItem("token");
       setAuthToken(token);
-      const res = await API.get("/me"); // protected
-      const data = res.data;
-      setStatus({
-        email: data.email,
-        subscriptionEnd: data.subscriptionEnd,
-        status: new Date() <= new Date(data.subscriptionEnd) ? "Active" : "Expired"
-      });
+      // Simplest: add email to localStorage at login. For now assume 'email' is stored:
+      const email = localStorage.getItem("email");
+      if (!email) {
+        setStatus({ message: "Email missing. Re-login." });
+        setLoading(false);
+        return;
+      }
+      const res = await API.get(`/me`);
+      setStatus(res.data);
     } catch (err) {
       setStatus({ message: err.response?.data?.message || "Failed to fetch status" });
     } finally { setLoading(false); }
@@ -83,7 +85,7 @@ const Dashboard = () => {
               <>
                 <button 
                   onClick={accessService} 
-                  className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg mt-3">
+                  className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg mt-3">
                   Use Service
                 </button>
   
